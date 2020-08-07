@@ -136,7 +136,7 @@ if (!listFunctionsResponse.functions().stream().anyMatch(f -> f.functionName().e
     for(FunctionConfiguration funcConfig : previousVersions) {
         if (funcConfig.version().isNumber()) {
             // Skip version aliases like "$LATEST"
-            if (funcConfig.version() + 20 < latestVersionInt) {
+            if ((funcConfig.version() as int) + 20 < latestVersionInt) {
                 System.out.println("Deleting old function version \"" + funcConfig.version() + "\"")
                 lambdaClient.deleteFunction(DeleteFunctionRequest.builder()
                         .functionName("${project.name}")
